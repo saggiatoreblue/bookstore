@@ -1,32 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <Drawer :drawer="drawer" />
+    <AppBar @toggle-drawer="toggleDrawer"/>
+
+    <v-main>
+      <BreadCrumbs />
+      <div class="containe-fluid">
+        <div class="row align-items-start p-4">
+          <router-view></router-view>
+        </div>
+
+      </div>
+
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Drawer from '@/components/Drawer'
+import AppBar from "@/components/AppBar";
+import BreadCrumbs from "@/components/BreadCrumbs";
+export default {
+  components: {
+    BreadCrumbs,
+    AppBar,
+    Drawer,
 
-#nav {
-  padding: 30px;
+  },
+  data: () => ({
+    drawer: true,
+  }),
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer
     }
   }
+
 }
+</script>
+<style lang="scss">
 </style>
